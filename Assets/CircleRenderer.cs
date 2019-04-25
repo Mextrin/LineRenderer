@@ -7,7 +7,6 @@ public class CircleRenderer : MonoBehaviour
 {
     [SerializeField, Tooltip("Radius of the circle")] float radius = 3f;
     [SerializeField, Range(3, 20), Tooltip("Amount of sides in the circle")] int segments = 10;
-    [Tooltip("I couldn't come up with anything better and didn't want to have radius and segments static so I made this just togglable bool that does nothing")] public static bool someBool;
 
     public float Radius
     {
@@ -19,13 +18,14 @@ public class CircleRenderer : MonoBehaviour
         }
     }
 
-    void Start()
+    public int Segments
     {
-    }
-
-    void Update()
-    {
-        
+        get => segments;
+        set
+        {
+            segments = value;
+            UpdateRenderer();
+        }
     }
 
     void UpdateRenderer()

@@ -5,7 +5,8 @@ using UnityEditor;
 
 public class CircleWindow : EditorWindow
 {
-    [MenuItem("Window/Circle Renderer Global Settings")]
+    CircleRenderer circleRenderer;
+    [MenuItem("Window/Circle Renderer Settings")]
     static void Init()
     {
         CircleWindow window = (CircleWindow)EditorWindow.GetWindow(typeof(CircleWindow));
@@ -14,6 +15,11 @@ public class CircleWindow : EditorWindow
 
     private void OnGUI()
     {
-        CircleRenderer.someBool = EditorGUILayout.Toggle("Some bool", CircleRenderer.someBool);
+        circleRenderer = (CircleRenderer)EditorGUILayout.ObjectField(circleRenderer, typeof(CircleRenderer), true);
+        if (circleRenderer)
+        {
+            circleRenderer.Radius = EditorGUILayout.FloatField("Radius", circleRenderer.Radius);
+            circleRenderer.Segments = EditorGUILayout.IntSlider("Segments", circleRenderer.Segments, 3, 20);
+        }
     }
 }
